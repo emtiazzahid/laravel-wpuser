@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
              'remember_token' => Str::random(10),
          ]);
 
-         Contact::factory(10)->create();
+         Contact::factory(50)->create();
     }
 }

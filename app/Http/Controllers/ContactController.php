@@ -8,21 +8,9 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    private $contact;
-
-    public function __construct(ContactInterface $contact){
-        $this->contact = $contact;
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-     */
-    public function index(Request $request)
+    public function index()
     {
-        return view('contacts', [
-            'contacts' => $this->contact->getContacts($request)
-        ]);
+        return view('contacts');
     }
 
 
