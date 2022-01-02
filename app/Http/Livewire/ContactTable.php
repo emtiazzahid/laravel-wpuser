@@ -15,6 +15,8 @@ class ContactTable extends Component
     public $orderBy = 'id';
     public $orderAsc = true;
 
+    public $contact = null;
+
     public function render()
     {
         return view('components.contact-table', [
@@ -22,5 +24,20 @@ class ContactTable extends Component
                 ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage),
         ]);
+    }
+
+    public function view($id)
+    {
+        $this->contact = Contact::findOrFail($id);
+        $this->openViewModal();
+    }
+
+    public function openViewModal()
+    {
+        $this->dispatchBrowserEvent('openContactViewModal');
+    }
+    public function closeViewModal()
+    {
+        $this->dispatchBrowserEvent('closeContactViewModal');
     }
 }
