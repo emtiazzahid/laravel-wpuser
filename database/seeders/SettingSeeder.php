@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
-class ContactSeeder extends Seeder
+class SettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,8 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        //
+//        Setting::insert([
+//            ['key' => '']
+//        ]);
     }
 }

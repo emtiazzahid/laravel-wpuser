@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('contacts') }}">
+        <form method="POST" action="{{ route('contacts.store') }}">
             @csrf
 
             <!-- Name -->
