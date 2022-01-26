@@ -20,6 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('email');
             $table->string('budget');
             $table->text('message')->nullable();
+            $table->boolean('is_wp_synced')->default(0);
             $table->timestamps();
         });
     }

@@ -12,11 +12,6 @@ class Settings extends Component
     public $username = '';
     public $password = '';
 
-    public function __construct($id = null)
-    {
-        parent::__construct($id);
-    }
-
     public function mount()
     {
         $settings = Setting::pluck('value', 'key')->toArray();
@@ -54,7 +49,5 @@ class Settings extends Component
         }
 
         session()->flash('message', 'Settings Updated Successfully.');
-
-//        $this->resetInputFields();
     }
 }

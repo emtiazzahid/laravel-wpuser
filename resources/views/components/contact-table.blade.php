@@ -1,4 +1,13 @@
 <div>
+    @if (session()->has('message'))
+        <div class="text-green-600">
+            {{ session('message') }}
+        </div>
+    @elseif (session()->has('error'))
+        <div class="text-red-600">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="w-full flex pb-10  mb-6">
         <div class="w-4/12 mx-1 px-4">
             <input wire:model.debounce.300ms="search" type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Search users...">
@@ -35,7 +44,7 @@
             </div>
         </div>
     </div>
-    <table class="table-auto w-full mb-6">
+    <table class="table-auto w-full mb-12">
         <thead>
         <tr>
             <th class="px-4 py-2">ID</th>
@@ -44,6 +53,7 @@
             <th class="px-4 py-2">Email</th>
             <th class="px-4 py-2">Budget</th>
             <th class="px-4 py-2">Created At</th>
+            <th class="px-4 py-2">WP Synced</th>
             <th class="px-4 py-2">Actions</th>
         </tr>
         </thead>
@@ -56,8 +66,11 @@
                 <td class="border px-4 py-2">{{ $contact->email }}</td>
                 <td class="border px-4 py-2">{{ $contact->budget }}</td>
                 <td class="border px-4 py-2">{{ $contact->created_at->diffForHumans() }}</td>
+                <td class="border px-4 py-2">{{ $contact->is_wp_synced ? 'True' : 'False' }}</td>
                 <td class="border px-4 py-2">
-                    <button type="button" class="py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <button wire:click.prevent="createWPAccount({{$contact->id}})"
+                            type="button"
+                            class="mb-2 py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Create WordPress Account
                     </button>
                     <button wire:click.prevent="view({{$contact->id}})"
