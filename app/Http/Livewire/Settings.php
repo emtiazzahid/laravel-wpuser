@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Setting;
 use Illuminate\Support\Arr;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class Settings extends Component
 {
+    use LivewireAlert;
+
     public $site_url = '';
     public $username = '';
     public $password = '';
@@ -48,6 +51,6 @@ class Settings extends Component
             $setting->save();
         }
 
-        session()->flash('message', 'Settings Updated Successfully.');
+        $this->alert('success', 'Settings Updated Successfully.');
     }
 }

@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Contact Routes
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 
 // Site setting / integrations routes

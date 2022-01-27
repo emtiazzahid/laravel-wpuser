@@ -6,12 +6,13 @@ use App\Models\Contact;
 use App\Models\Setting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ContactTable extends Component
 {
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     public $perPage = 10;
     public $search = '';
@@ -46,21 +47,22 @@ class ContactTable extends Component
             return session()->flash('error', 'Missing WP site settings');
         }
 
-        $contact = Contact::find($id);
+        $contact = Contact::findOrFail($id);
         $response = Http::withBasicAuth($settings['username'], $settings['password'])->post($this->getBaseUrl($settings['site_url']) . 'customers', [
             'name' => $contact->name,
             'phone' => $contact->phone_number,
             'email' => $contact->email,
             'budget' => $contact->budget,
-            'message' => $contact->message
+            'message' => $contact->message,
+            'source' => route('contacts.show', ['id' => $id])
         ]);
 
         if ($response->successful()) {
             $contact->update(['is_wp_synced' => 1]);
-            return session()->flash('message', 'Data sync successfull');
+            $this->alert('success', 'Data sync successfull');
         } else {
             $body = json_decode($response->body(), true);
-            return session()->flash('error', 'Something wrong happend. Please try again. DETAIL: ' . $body['message']);
+            $this->alert('warning',  'Something wrong happend. Please try again. DETAIL: ' . $body['message']);
         }
     }
 

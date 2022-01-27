@@ -1,4 +1,7 @@
 <div>
+    <div wire:loading>
+        Loading..
+    </div>
     @if (session()->has('message'))
         <div class="text-green-600">
             {{ session('message') }}
@@ -87,4 +90,7 @@
     {!! $contacts->links() !!}
 
     @include('contacts.view')
+
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    <x-livewire-alert::flash />
 </div>
