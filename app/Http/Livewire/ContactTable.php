@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Contact;
 use App\Models\Setting;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -44,10 +43,11 @@ class ContactTable extends Component
         $settings = Setting::pluck('value', 'key')->toArray();
 
         if (!isset($settings['site_url']) || !isset($settings['username']) || !isset($settings['password'])) {
-            return session()->flash('error', 'Missing WP site settings');
+            return $this->alert('warning',  'Missing WP site settings');
         }
 
         $contact = Contact::findOrFail($id);
+
         $response = Http::withBasicAuth($settings['username'], $settings['password'])->post($this->getBaseUrl($settings['site_url']) . 'customers', [
             'name' => $contact->name,
             'phone' => $contact->phone_number,
@@ -62,7 +62,7 @@ class ContactTable extends Component
             $this->alert('success', 'Data sync successfull');
         } else {
             $body = json_decode($response->body(), true);
-            $this->alert('warning',  'Something wrong happend. Please try again. DETAIL: ' . $body['message']);
+            $this->alert('warning',  'Something wrong happened. Please try again. DETAIL: ' . $body['message']);
         }
     }
 

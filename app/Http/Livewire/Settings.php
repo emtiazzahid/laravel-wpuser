@@ -28,8 +28,6 @@ class Settings extends Component
     }
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
     private function resetInputFields()
