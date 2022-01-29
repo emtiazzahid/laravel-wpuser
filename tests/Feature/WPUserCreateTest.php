@@ -28,7 +28,7 @@ class WPUserCreateTest extends TestCase
         $contact = Contact::factory()->create();
 
         Setting::insert([
-            ['key' => 'site_url', 'value' => $this->faker->url()],
+            ['key' => 'site_url', 'value' => 'http://www.7timer.info/'], // 7timer is an public api that provide numerical weather forcast. using it for test a http request
             ['key' => 'username', 'value' => $this->faker->userName()],
             ['key' => 'password', 'value' => $this->faker->password()]
         ]);
