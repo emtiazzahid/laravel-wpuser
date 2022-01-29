@@ -6,6 +6,7 @@ use App\Repositories\Contact\ContactInterface;
 use App\Repositories\Contact\ContactRepository;
 use App\Repositories\Setting\SettingInterface;
 use App\Repositories\Setting\SettingRepository;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
