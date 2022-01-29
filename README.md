@@ -45,7 +45,7 @@ php artisan migrate --seed
 .\vendor\bin\phpunit
 ```
 
-###For WP Plugin for this visit: [quiz app](https://github.com/emtiazzahid/wp-laravel-user)
+###For WP Plugin for this visit: [wp-laravel-user](https://github.com/emtiazzahid/wp-laravel-user)
 
 ## License
 
