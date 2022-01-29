@@ -48,21 +48,20 @@ class ContactTable extends Component
 
         $contact = Contact::findOrFail($id);
 
-        $response = Http::withBasicAuth($settings['username'], $settings['password'])->post($this->getBaseUrl($settings['site_url']) . 'customers', [
-            'name' => $contact->name,
-            'phone' => $contact->phone_number,
-            'email' => $contact->email,
-            'budget' => $contact->budget,
-            'message' => $contact->message,
-            'source' => route('contacts.show', ['id' => $id])
-        ]);
+        $response = $this->sendHttpRequest($settings, $contact);
 
         if ($response->successful()) {
             $contact->update(['is_wp_synced' => 1]);
             $this->alert('success', 'Data sync successfull');
         } else {
             $body = json_decode($response->body(), true);
-            $this->alert('warning',  'Something wrong happened. Please try again. DETAIL: ' . $body['message']);
+            if(isset($body['message'])) {
+                $detail = $body['message'];
+            } else {
+                $detail = 'Unknown';
+            }
+            
+            $this->alert('warning',  'Something wrong happened. Please try again. DETAIL: ' . $detail);
         }
     }
 
@@ -80,5 +79,17 @@ class ContactTable extends Component
     {
         $url_info = parse_url($fullUrl);
         return $url_info['scheme'] . '://' . $url_info['host'] . '/wp-json/wlu/v1/';
+    }
+
+    public function sendHttpRequest($settings, $contact) 
+    {
+        return Http::withBasicAuth($settings['username'], $settings['password'])->post($this->getBaseUrl($settings['site_url']) . 'customers', [
+            'name' => $contact->name,
+            'phone' => $contact->phone_number,
+            'email' => $contact->email,
+            'budget' => $contact->budget,
+            'message' => $contact->message,
+            'source' => route('contacts.show', ['id' => $contact->id])
+        ]);
     }
 }
