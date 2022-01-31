@@ -5,6 +5,11 @@
 
 ## Demo: [Visit](https://larapress-app.herokuapp.com/)
 
+```
+Email: admin@mail.com
+Password: password
+```
+
 # Installation
 1. Clone this repo
 ```
