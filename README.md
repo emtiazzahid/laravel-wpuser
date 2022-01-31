@@ -1,9 +1,9 @@
 # Laravel to WP user
-![Heroku](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/badges/quality-score.png?b=master&s=0348db35ecefcd904d7b79418e1f627e452bd13e)
-![Heroku](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/badges/build.png?b=master&s=e4952fa027452bb103e589c47d8b3edeb5b3c2bf)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/badges/build.png?b=main)](https://scrutinizer-ci.com/g/emtiazzahid/laravel-wpuser/build-status/main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lime.svg)](https://opensource.org/licenses/MIT)
 
-## Demo: [APP](https://larapress-app.herokuapp.com/)
+## Demo: [Visit](https://larapress-app.herokuapp.com/)
 
 # Installation
 1. Clone this repo
@@ -45,7 +45,7 @@ php artisan migrate --seed
 .\vendor\bin\phpunit
 ```
 
-###For WP Plugin for this visit: [wp-laravel-user](https://github.com/emtiazzahid/wp-laravel-user)
+#### For WP Plugin for this visit: [wp-laravel-user](https://github.com/emtiazzahid/wp-laravel-user)
 
 ## License
 
